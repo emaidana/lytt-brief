@@ -581,6 +581,82 @@ body {
 main { padding-bottom: 80px; }
 ::-webkit-scrollbar { width: 0; }
 
+/* ─── INDUSTRY ─── */
+.ind-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 20px 22px;
+}
+
+.ind-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 18px 16px;
+  background: var(--white);
+  border: 1px solid var(--line2);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.ind-chip:active { background: var(--off); }
+.ind-chip:hover { border-color: var(--accent); }
+
+.ind-chip .ind-icon {
+  font-size: 20px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.ind-chip .ind-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.ind-chip .ind-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  color: var(--ink4);
+  line-height: 1.4;
+}
+
+.ind-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 22px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.ind-back:hover { opacity: 0.7; }
+
+.ind-header {
+  font-family: 'EB Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink);
+  padding: 0 22px 6px;
+}
+
+.ind-content { display: none; }
+.ind-content.active { display: block; }
+
+.ind-detail { display: none; }
+.ind-detail.active { display: block; }
+
 </style>
 </head>
 <body>
@@ -603,6 +679,7 @@ main { padding-bottom: 80px; }
   <button class="tab" onclick="go('yc')">YC Watch</button>
   <button class="tab" onclick="go('vc')">VC Moves</button>
   <button class="tab" onclick="go('oh')">Overheard</button>
+  <button class="tab" onclick="go('ind')">Industry</button>
 </div>
 
 <main>
@@ -618,6 +695,7 @@ main { padding-bottom: 80px; }
     <div class="chip"><b>6</b> YC startups</div>
     <div class="chip"><b>4</b> VC moves</div>
     <div class="chip"><b>5</b> Overheard</div>
+    <div class="chip"><b>5</b> Industries</div>
   </div>
 </div>
 
@@ -1167,6 +1245,533 @@ main { padding-bottom: 80px; }
 
 </section>
 
+
+<!-- ════════ INDUSTRY ════════ -->
+<section id="s-ind" class="section">
+
+  <!-- Industry Grid -->
+  <div class="ind-grid" id="ind-grid">
+    <button class="ind-chip" onclick="goIndustry('mktg')">
+      <div class="ind-icon">📈</div>
+      <div class="ind-name">Marketing &amp; Growth</div>
+      <div class="ind-sub">AI tools, attribution, content, personalization</div>
+    </button>
+    <button class="ind-chip" onclick="goIndustry('health')">
+      <div class="ind-icon">🏥</div>
+      <div class="ind-name">Healthcare</div>
+      <div class="ind-sub">Clinical AI, diagnostics, revenue cycle</div>
+    </button>
+    <button class="ind-chip" onclick="goIndustry('fintech')">
+      <div class="ind-icon">💳</div>
+      <div class="ind-name">Fintech</div>
+      <div class="ind-sub">Payments, lending, fraud, compliance</div>
+    </button>
+    <button class="ind-chip" onclick="goIndustry('retail')">
+      <div class="ind-icon">🛒</div>
+      <div class="ind-name">Retail &amp; E-commerce</div>
+      <div class="ind-sub">Demand forecasting, personalization, ops</div>
+    </button>
+    <button class="ind-chip" onclick="goIndustry('legal')">
+      <div class="ind-icon">⚖️</div>
+      <div class="ind-name">Legal</div>
+      <div class="ind-sub">Contract AI, compliance, document review</div>
+    </button>
+  </div>
+
+  <!-- Industry Detail Views -->
+  <div class="ind-detail" id="ind-detail">
+    <button class="ind-back" onclick="backToIndustries()">← All industries</button>
+    <div class="ind-header" id="ind-header"></div>
+  </div>
+
+  <!-- Marketing & Growth -->
+  <div class="ind-content" id="ind-mktg">
+    <article class="card lead">
+      <div class="c-meta">
+        <span class="c-cat">Attribution</span>
+        <span class="c-sep">·</span>
+        <span class="c-src">Marketing AI</span>
+        <span class="c-min">2 min</span>
+      </div>
+      <div class="c-preview">
+        <h2 class="c-hed">AI attribution models are killing last-click — and CMOs are finally listening</h2>
+        <p class="c-lede">Multi-touch AI attribution is replacing last-click in enterprise marketing stacks. The shift means 30-40% of budget previously allocated to bottom-funnel channels is being redistributed to brand and awareness.</p>
+        <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+      </div>
+      <div class="c-detail">
+        <h2 class="c-hed">AI attribution models are killing last-click — and CMOs are finally listening</h2>
+        <div class="sb-wrap">
+          <div class="sb"><span class="sb-k">What happened:</span> AI-native attribution platforms (Northbeam, Triple Whale, Rockerbox) now model the full customer journey across 15+ touchpoints. Last-click is provably wrong — it over-credits retargeting and under-credits the content that drove initial interest.</div>
+          <div class="sb"><span class="sb-k">Why it matters:</span> Brands switching to AI attribution are reallocating 30-40% of spend from bottom-funnel to upper-funnel — and seeing better ROAS. The data finally proves what brand marketers always believed.</div>
+          <div class="sb"><span class="sb-k">What's next:</span> Expect Google and Meta to resist. Their ad platforms benefit from last-click. Independent attribution becomes a strategic imperative for any brand spending $500K+/month.</div>
+        </div>
+        <div class="case">
+          <div class="case-hdr">
+            <span class="case-lbl">Case Study</span>
+            <span class="case-co">DTC Beauty Brand · $2M/mo spend</span>
+          </div>
+          <div class="case-body">
+            <p>Switched from Google Analytics last-click to Northbeam's AI model. Discovered that podcast ads were driving 3x the attributed revenue Google reported. <strong>Shifted 25% of Meta retargeting budget to podcasts. ROAS improved 41% in 60 days.</strong></p>
+          </div>
+        </div>
+        <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="c-meta">
+        <span class="c-cat">Content</span>
+        <span class="c-sep">·</span>
+        <span class="c-src">AI Generation</span>
+        <span class="c-min">1 min</span>
+      </div>
+      <div class="c-preview">
+        <h2 class="c-hed">AI-generated content now outperforms human content on engagement — with a catch</h2>
+        <p class="c-lede">HubSpot's 2026 benchmark: AI-drafted blog posts get 18% more clicks but 23% lower time-on-page. The implication — AI wins the headline game but loses the depth game.</p>
+        <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+      </div>
+      <div class="c-detail">
+        <h2 class="c-hed">AI-generated content now outperforms human content on engagement — with a catch</h2>
+        <div class="sb-wrap">
+          <div class="sb"><span class="sb-k">The data:</span> Across 12,000 blog posts, AI-drafted content earned 18% higher CTR from search and social. But time-on-page dropped 23% and conversion rates were flat. Readers click more but trust less.</div>
+          <div class="sb"><span class="sb-k">The playbook:</span> Use AI for volume and hooks. Use humans for depth pieces that convert. The hybrid model wins — not pure AI, not pure human.</div>
+        </div>
+        <div class="case">
+          <div class="case-hdr">
+            <span class="case-lbl">Case Study</span>
+            <span class="case-co">B2B SaaS · Content Team of 2</span>
+          </div>
+          <div class="case-body">
+            <p>Produce 40 AI-drafted SEO posts/month for traffic, plus 4 deep human-written pieces for conversion. <strong>Organic traffic up 3.2x. Pipeline from content up 67%. Total content cost: same as before.</strong></p>
+          </div>
+        </div>
+        <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="c-meta">
+        <span class="c-cat">Personalization</span>
+        <span class="c-sep">·</span>
+        <span class="c-src">AI at Scale</span>
+        <span class="c-min">1 min</span>
+      </div>
+      <div class="c-preview">
+        <h2 class="c-hed">Real-time AI personalization is now table stakes — not a competitive edge</h2>
+        <p class="c-lede">67% of enterprise e-commerce sites now run some form of AI personalization. The new edge is personalization speed — sub-100ms recommendations during the session, not after.</p>
+        <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+      </div>
+      <div class="c-detail">
+        <h2 class="c-hed">Real-time AI personalization is now table stakes — not a competitive edge</h2>
+        <div class="sb-wrap">
+          <div class="sb"><span class="sb-k">The shift:</span> Basic AI personalization (recommended products, dynamic emails) is commoditized. The new frontier is real-time session personalization — adapting the entire page layout, pricing display, and CTA copy within milliseconds based on in-session behavior.</div>
+          <div class="sb"><span class="sb-k">What's next:</span> Expect AI personalization to move from marketing into product UX. The entire app experience will adapt per-user in real time.</div>
+        </div>
+        <div class="case">
+          <div class="case-hdr">
+            <span class="case-lbl">Case Study</span>
+            <span class="case-co">Travel Platform · Session AI</span>
+          </div>
+          <div class="case-body">
+            <p>Deployed real-time session personalization that adapts search result ordering, pricing emphasis, and urgency messaging based on browsing speed and scroll patterns. <strong>Conversion rate up 28%. Revenue per session up 34%. Implemented in 3 weeks with Dynamic Yield.</strong></p>
+          </div>
+        </div>
+        <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+      </div>
+    </article>
+  </div>
+
+  <!-- Healthcare -->
+  <div class="ind-content" id="ind-health">
+    <article class="card lead">
+      <div class="c-meta">
+        <span class="c-cat">Diagnostics</span>
+        <span class="c-sep">·</span>
+        <span class="c-src">Clinical AI</span>
+        <span class="c-min">2 min</span>
+      </div>
+      <div class="c-preview">
+        <h2 class="c-hed">FDA cleared 171 AI medical devices in 2025 — radiology leads, but pathology is surging</h2>
+        <p class="c-lede">Radiology still dominates FDA AI clearances, but pathology and cardiology AI devices grew 3x year-over-year. The diagnostic AI market is diversifying fast.</p>
+        <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+      </div>
+      <div class="c-detail">
+        <h2 class="c-hed">FDA cleared 171 AI medical devices in 2025 — radiology leads, but pathology is surging</h2>
+        <div class="sb-wrap">
+          <div class="sb"><span class="sb-k">By the numbers:</span> 171 AI/ML-enabled devices cleared in 2025. Radiology: 68%. Pathology clearances tripled. Cardiology AI grew 2.4x. The regulatory pathway is now well-understood — expect acceleration.</div>
+          <div class="sb"><span class="sb-k">Why it matters:</span> Every cleared AI device creates a reimbursement code. Reimbursement codes create a market. Pathology and cardiology AI are about to have the same investment surge radiology AI saw in 2022-2024.</div>
+          <div class="sb"><span class="sb-k">What's next:</span> CMS reimbursement decisions in Q3 2026 will determine which AI diagnostics become standard of care vs. nice-to-have.</div>
+        </div>
+        <div class="case">
+          <div class="case-hdr">
+            <span class="case-lbl">Case Study</span>
+            <span class="case-co">Community Hospital · AI Pathology</span>
+          </div>
+          <div class="case-body">
+            <p>Deployed Paige AI for prostate cancer pathology screening. Pathologist review time dropped 40%. <strong>Caught 3 cases in first quarter that manual review missed — all early-stage, all treatable. ROI was measured in lives, not dollars.</strong></p>
+          </div>
+        </div>
+        <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="c-meta">
+        <span class="c-cat">Revenue Cycle</span>
+        <span class="c-sep">·</span>
+        <span class="c-src">Healthcare Ops</span>
+        <span class="c-min">1 min</span>
+      </div>
+      <div class="c-preview">
+        <h2 class="c-hed">AI prior authorization is saving health systems $4.2M per year on average</h2>
+        <p class="c-lede">Automated prior auth — the single highest-ROI AI deployment in healthcare. Average denial rate drops from 12% to 4%. Average time-to-approval: 47 minutes vs. 14 days.</p>
+        <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+      </div>
+      <div class="c-detail">
+        <h2 class="c-hed">AI prior authorization is saving health systems $4.2M per year on average</h2>
+        <div class="sb-wrap">
+          <div class="sb"><span class="sb-k">The problem:</span> Prior authorization is healthcare's most hated process — 34 hours per physician per week wasted on administrative tasks. Denials cost the average hospital $8.6M annually in delayed or lost revenue.</div>
+          <div class="sb"><span class="sb-k">The solution:</span> AI systems now auto-generate prior auth submissions with clinical documentation that matches payer-specific criteria. Denial rates drop 60-70%. Time-to-approval collapses from weeks to under an hour.</div>
+        </div>
+        <div class="case">
+          <div class="case-hdr">
+            <span class="case-lbl">Case Study</span>
+            <span class="case-co">Regional Health System · 12 Hospitals</span>
+          </div>
+          <div class="case-body">
+            <p>Deployed Olive AI for automated prior authorization across orthopedics and cardiology. <strong>Denial rate dropped from 14% to 3.8%. Net revenue recovery: $5.1M in year one. 22 FTEs redeployed from auth processing to patient care coordination.</strong></p>
+          </div>
+        </div>
+        <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="c-meta">
+        <span class="c-cat">Compliance</span>
+        <span class="c-sep">·</span>
+        <span class="c-src">HIPAA + AI</span>
+        <span class="c-min">1 min</span>
+      </div>
+      <div class="c-preview">
+        <h2 class="c-hed">HHS finalizes AI-specific HIPAA guidance — and it's stricter than anyone expected</h2>
+        <p class="c-lede">New HHS guidance classifies AI model outputs containing PHI as "protected health information" — even if the original training data was de-identified. Compliance teams are scrambling.</p>
+        <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+      </div>
+      <div class="c-detail">
+        <h2 class="c-hed">HHS finalizes AI-specific HIPAA guidance — and it's stricter than anyone expected</h2>
+        <div class="sb-wrap">
+          <div class="sb"><span class="sb-k">What changed:</span> If an AI model generates output that can re-identify a patient — even from de-identified training data — that output is now PHI under HIPAA. This applies to inference, not just training.</div>
+          <div class="sb"><span class="sb-k">Why it matters:</span> Every health system using LLMs for clinical documentation, patient communication, or care coordination needs to audit their AI pipelines immediately. The liability surface just expanded significantly.</div>
+          <div class="sb"><span class="sb-k">The bottom line:</span> Start the compliance audit now. HHS enforcement actions begin Q4 2026. The fines are not theoretical.</div>
+        </div>
+        <div class="case">
+          <div class="case-hdr">
+            <span class="case-lbl">Case Study</span>
+            <span class="case-co">Health AI Startup · Compliance Pivot</span>
+          </div>
+          <div class="case-body">
+            <p>Rebuilt their inference pipeline with on-premise models after the guidance dropped. <strong>Added PHI detection layer that scrubs outputs before delivery. Compliance certification became their #1 sales differentiator — 3 enterprise deals closed citing it specifically.</strong></p>
+          </div>
+        </div>
+        <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+      </div>
+    </article>
+  </div>
+
+  <!-- Fintech -->
+  <div class="ind-content" id="ind-fintech">
+    <article class="card lead">
+      <div class="c-meta">
+        <span class="c-cat">Fraud</span>
+        <span class="c-sep">·</span>
+        <span class="c-src">AI Detection</span>
+        <span class="c-min">2 min</span>
+      </div>
+      <div class="c-preview">
+        <h2 class="c-hed">AI-generated synthetic identities now account for 85% of new account fraud</h2>
+        <p class="c-lede">Deepfake KYC documents, AI-generated selfies, synthetic credit histories — fraud teams are fighting AI with AI. The arms race is accelerating faster than compliance can adapt.</p>
+        <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+      </div>
+      <div class="c-detail">
+        <h2 class="c-hed">AI-generated synthetic identities now account for 85% of new account fraud</h2>
+        <div class="sb-wrap">
+          <div class="sb"><span class="sb-k">The threat:</span> Synthetic identity fraud losses hit $4.6B in 2025. AI-generated documents pass manual KYC review 73% of the time. Traditional rule-based fraud detection catches less than 20% of synthetic applications.</div>
+          <div class="sb"><span class="sb-k">The response:</span> AI fraud detection platforms (Sardine, Unit21, Alloy) now analyze behavioral biometrics, device fingerprints, and application velocity patterns that synthetics can't fake — yet.</div>
+          <div class="sb"><span class="sb-k">What's next:</span> Liveness detection and behavioral AI will become mandatory for any regulated onboarding flow by end of 2026. Budget for it now.</div>
+        </div>
+        <div class="case">
+          <div class="case-hdr">
+            <span class="case-lbl">Case Study</span>
+            <span class="case-co">Neobank · 2M Accounts</span>
+          </div>
+          <div class="case-body">
+            <p>Switched from rule-based to AI fraud detection. <strong>Synthetic identity fraud caught at onboarding jumped from 18% to 91%. False positive rate dropped 60% — legitimate customers stopped getting blocked. Net fraud losses down $3.2M annually.</strong></p>
+          </div>
+        </div>
+        <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="c-meta">
+        <span class="c-cat">Lending</span>
+        <span class="c-sep">·</span>
+        <span class="c-src">AI Underwriting</span>
+        <span class="c-min">1 min</span>
+      </div>
+      <div class="c-preview">
+        <h2 class="c-hed">AI underwriting approves 34% more borrowers with lower default rates — regulators are watching</h2>
+        <p class="c-lede">AI models using alternative data (cash flow, rent payments, employment patterns) approve significantly more thin-file borrowers while maintaining lower loss rates than FICO-based models.</p>
+        <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+      </div>
+      <div class="c-detail">
+        <h2 class="c-hed">AI underwriting approves 34% more borrowers with lower default rates — regulators are watching</h2>
+        <div class="sb-wrap">
+          <div class="sb"><span class="sb-k">The data:</span> Upstart, Zest AI, and Petal report 30-40% more approvals with 15-25% lower default rates vs. traditional FICO models. The improvement is largest for thin-file and no-file borrowers — exactly the population regulators want served.</div>
+          <div class="sb"><span class="sb-k">The tension:</span> CFPB wants explainability. AI underwriting models are better at predicting default but worse at explaining why. Adverse action notices generated by AI are being challenged in court.</div>
+        </div>
+        <div class="case">
+          <div class="case-hdr">
+            <span class="case-lbl">Case Study</span>
+            <span class="case-co">Community Bank · SMB Lending</span>
+          </div>
+          <div class="case-body">
+            <p>Deployed AI underwriting for small business loans under $250K. <strong>Approval rate up 38%. Default rate down 22%. Average time-to-decision: 4 minutes vs. 8 days. SMB lending volume doubled in 6 months without adding underwriters.</strong></p>
+          </div>
+        </div>
+        <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="c-meta">
+        <span class="c-cat">Compliance</span>
+        <span class="c-sep">·</span>
+        <span class="c-src">RegTech AI</span>
+        <span class="c-min">1 min</span>
+      </div>
+      <div class="c-preview">
+        <h2 class="c-hed">AI compliance monitoring just replaced a 40-person team at a top-20 bank</h2>
+        <p class="c-lede">A major US bank deployed AI to monitor trading communications for regulatory violations. 40 compliance analysts redeployed. False positive rate dropped 78%. The CFO called it "the highest-ROI project in the bank."</p>
+        <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+      </div>
+      <div class="c-detail">
+        <h2 class="c-hed">AI compliance monitoring just replaced a 40-person team at a top-20 bank</h2>
+        <div class="sb-wrap">
+          <div class="sb"><span class="sb-k">What happened:</span> AI now monitors email, Slack, Bloomberg chat, and voice calls for insider trading signals, market manipulation language, and regulatory violations — in real time, across 14 languages.</div>
+          <div class="sb"><span class="sb-k">Why it matters:</span> Compliance is the single largest cost center in banking after technology. AI doesn't just reduce cost — it catches violations that humans miss because it never gets fatigued reviewing 50,000 messages per day.</div>
+        </div>
+        <div class="case">
+          <div class="case-hdr">
+            <span class="case-lbl">Case Study</span>
+            <span class="case-co">Top-20 US Bank · Trading Floor</span>
+          </div>
+          <div class="case-body">
+            <p>Deployed Behavox AI across equity and fixed income desks. <strong>False positives dropped from 12,000/month to 2,600. Caught 2 actual violations in month one that manual review had missed for 6+ months. Annual compliance cost reduced by $8.4M.</strong></p>
+          </div>
+        </div>
+        <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+      </div>
+    </article>
+  </div>
+
+  <!-- Retail & E-commerce -->
+  <div class="ind-content" id="ind-retail">
+    <article class="card lead">
+      <div class="c-meta">
+        <span class="c-cat">Demand</span>
+        <span class="c-sep">·</span>
+        <span class="c-src">AI Forecasting</span>
+        <span class="c-min">2 min</span>
+      </div>
+      <div class="c-preview">
+        <h2 class="c-hed">AI demand forecasting is cutting retail inventory waste by 30% — and it's still early</h2>
+        <p class="c-lede">Retailers using AI demand forecasting report 25-35% less overstock, 40% fewer stockouts, and 15% higher gross margins. The gap between AI-native and legacy retailers is widening fast.</p>
+        <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+      </div>
+      <div class="c-detail">
+        <h2 class="c-hed">AI demand forecasting is cutting retail inventory waste by 30% — and it's still early</h2>
+        <div class="sb-wrap">
+          <div class="sb"><span class="sb-k">The shift:</span> Traditional forecasting uses 12-18 months of sales history. AI models incorporate weather, social media trends, competitor pricing, economic indicators, and local events — updated daily.</div>
+          <div class="sb"><span class="sb-k">Why it matters:</span> Inventory is the #1 cash trap in retail. Every point of overstock reduction flows directly to margin. At scale, this is billions in recovered working capital.</div>
+          <div class="sb"><span class="sb-k">What's next:</span> Autonomous replenishment — AI not just predicting demand but automatically placing purchase orders — is the next frontier. Early adopters are already testing it.</div>
+        </div>
+        <div class="case">
+          <div class="case-hdr">
+            <span class="case-lbl">Case Study</span>
+            <span class="case-co">Mid-Market Grocer · 85 Locations</span>
+          </div>
+          <div class="case-body">
+            <p>Deployed AI demand forecasting for fresh produce — the hardest category to predict. <strong>Waste reduced 32%. Stockouts down 41%. Gross margin on perishables improved 4.2 points. $6.8M in annual savings across 85 stores.</strong></p>
+          </div>
+        </div>
+        <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="c-meta">
+        <span class="c-cat">Ops</span>
+        <span class="c-sep">·</span>
+        <span class="c-src">AI Automation</span>
+        <span class="c-min">1 min</span>
+      </div>
+      <div class="c-preview">
+        <h2 class="c-hed">AI customer service agents now handle 68% of retail support tickets end-to-end</h2>
+        <p class="c-lede">No human touch required for returns, order tracking, and product questions. CSAT scores are flat or improving. The cost savings are not incremental — they're transformational.</p>
+        <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+      </div>
+      <div class="c-detail">
+        <h2 class="c-hed">AI customer service agents now handle 68% of retail support tickets end-to-end</h2>
+        <div class="sb-wrap">
+          <div class="sb"><span class="sb-k">The data:</span> Top retailers using AI agents (Forethought, Ada, Sierra) resolve 60-75% of inbound tickets without human involvement. Average resolution time: 2.3 minutes vs. 47 minutes for human agents.</div>
+          <div class="sb"><span class="sb-k">The surprise:</span> CSAT is equal or higher for AI-resolved tickets. Customers prefer instant resolution over human warmth for transactional issues. The "people want humans" assumption is wrong for 70% of support queries.</div>
+        </div>
+        <div class="case">
+          <div class="case-hdr">
+            <span class="case-lbl">Case Study</span>
+            <span class="case-co">DTC Fashion · 400K tickets/year</span>
+          </div>
+          <div class="case-body">
+            <p>Deployed Sierra AI for returns, exchanges, and order status. <strong>71% of tickets fully automated. Human agents refocused on high-value styling consultations that drive upsells. Support cost down 54%. Revenue per support interaction up 23%.</strong></p>
+          </div>
+        </div>
+        <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="c-meta">
+        <span class="c-cat">Pricing</span>
+        <span class="c-sep">·</span>
+        <span class="c-src">Dynamic AI</span>
+        <span class="c-min">1 min</span>
+      </div>
+      <div class="c-preview">
+        <h2 class="c-hed">AI dynamic pricing is no longer just for airlines — grocery and apparel are adopting fast</h2>
+        <p class="c-lede">Real-time AI pricing adjusts by location, time, inventory level, and competitor pricing. Early retail adopters report 8-12% margin improvement on the same volume.</p>
+        <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+      </div>
+      <div class="c-detail">
+        <h2 class="c-hed">AI dynamic pricing is no longer just for airlines — grocery and apparel are adopting fast</h2>
+        <div class="sb-wrap">
+          <div class="sb"><span class="sb-k">The shift:</span> AI pricing engines now process competitor prices, inventory levels, weather, local events, and demand elasticity to set optimal prices — updated hourly or even per-session for e-commerce.</div>
+          <div class="sb"><span class="sb-k">The tension:</span> Consumer backlash risk is real. Transparency matters. Retailers deploying dynamic pricing without clear communication are seeing negative press. The smart approach: dynamic markdowns (always welcome) before dynamic markups.</div>
+        </div>
+        <div class="case">
+          <div class="case-hdr">
+            <span class="case-lbl">Case Study</span>
+            <span class="case-co">Regional Grocery · 40 Stores</span>
+          </div>
+          <div class="case-body">
+            <p>Used AI to dynamically markdown perishables approaching expiration, optimizing timing and depth of discount. <strong>Food waste down 28%. Markdown revenue recovered 19% vs. previous flat-discount strategy. Zero customer complaints — everyone loves a smarter sale.</strong></p>
+          </div>
+        </div>
+        <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+      </div>
+    </article>
+  </div>
+
+  <!-- Legal -->
+  <div class="ind-content" id="ind-legal">
+    <article class="card lead">
+      <div class="c-meta">
+        <span class="c-cat">Contracts</span>
+        <span class="c-sep">·</span>
+        <span class="c-src">AI Review</span>
+        <span class="c-min">2 min</span>
+      </div>
+      <div class="c-preview">
+        <h2 class="c-hed">AI contract review is 90% as accurate as senior associates — at 1% of the cost</h2>
+        <p class="c-lede">Large law firms are quietly deploying AI for first-pass contract review. Not replacing lawyers — but a first-year associate now reviews 10x the volume with AI-assisted markup.</p>
+        <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+      </div>
+      <div class="c-detail">
+        <h2 class="c-hed">AI contract review is 90% as accurate as senior associates — at 1% of the cost</h2>
+        <div class="sb-wrap">
+          <div class="sb"><span class="sb-k">The data:</span> Stanford Law's 2026 benchmark tested AI contract review (Spellbook, Luminance, Harvey) against senior associates on NDA, SaaS, and M&A agreements. AI matched 90% accuracy for issue-spotting. Time: 26 seconds vs. 92 minutes.</div>
+          <div class="sb"><span class="sb-k">Why it matters:</span> The billable hour model for routine contract work is being disrupted from within. Firms that adopt AI will do more volume at lower cost. Firms that don't will lose clients to those that do.</div>
+          <div class="sb"><span class="sb-k">What's next:</span> AI-first legal service providers (not firms) will emerge offering fixed-fee contract review at 80% below BigLaw rates. The unbundling of legal services accelerates.</div>
+        </div>
+        <div class="case">
+          <div class="case-hdr">
+            <span class="case-lbl">Case Study</span>
+            <span class="case-co">Am Law 100 Firm · M&A Practice</span>
+          </div>
+          <div class="case-body">
+            <p>Deployed Harvey AI for first-pass due diligence on a 2,400-document data room. <strong>AI flagged 94% of the issues senior associates found — plus 12 additional risks humans missed. Review time: 3 hours vs. estimated 340 associate-hours. Client billed flat fee, firm kept the efficiency gain.</strong></p>
+          </div>
+        </div>
+        <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="c-meta">
+        <span class="c-cat">Discovery</span>
+        <span class="c-sep">·</span>
+        <span class="c-src">AI E-Discovery</span>
+        <span class="c-min">1 min</span>
+      </div>
+      <div class="c-preview">
+        <h2 class="c-hed">AI e-discovery costs dropped 70% in 18 months — and accuracy improved</h2>
+        <p class="c-lede">LLM-powered document review for litigation is replacing the armies of contract attorneys who used to bill $35-75/hour for linear review. The economics have permanently shifted.</p>
+        <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+      </div>
+      <div class="c-detail">
+        <h2 class="c-hed">AI e-discovery costs dropped 70% in 18 months — and accuracy improved</h2>
+        <div class="sb-wrap">
+          <div class="sb"><span class="sb-k">What changed:</span> LLM-based review (Relativity aiR, Everlaw AI) now handles document classification, privilege review, and relevance scoring with human-equivalent accuracy. Cost per document dropped from $1.50-3.00 to $0.30-0.60.</div>
+          <div class="sb"><span class="sb-k">Why it matters:</span> E-discovery is a $15B market built on human review labor. 70% cost reduction doesn't trim the market — it restructures it. Every litigation budget in America just got recalculated.</div>
+        </div>
+        <div class="case">
+          <div class="case-hdr">
+            <span class="case-lbl">Case Study</span>
+            <span class="case-co">Patent Litigation · 1.2M Documents</span>
+          </div>
+          <div class="case-body">
+            <p>Used Relativity aiR for first-pass review of 1.2M documents in a patent dispute. <strong>Review completed in 8 days vs. estimated 14 weeks with human reviewers. Cost: $380K vs. $2.1M estimate. Recall rate: 96.3% — higher than the human baseline of 93.1%.</strong></p>
+          </div>
+        </div>
+        <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="c-meta">
+        <span class="c-cat">Regulatory</span>
+        <span class="c-sep">·</span>
+        <span class="c-src">AI Compliance</span>
+        <span class="c-min">1 min</span>
+      </div>
+      <div class="c-preview">
+        <h2 class="c-hed">AI regulatory monitoring now tracks 2,400+ jurisdictions in real time</h2>
+        <p class="c-lede">For multinational companies, regulatory compliance across jurisdictions was a team of 20+. AI systems now monitor, flag, and draft compliance responses across every major jurisdiction simultaneously.</p>
+        <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+      </div>
+      <div class="c-detail">
+        <h2 class="c-hed">AI regulatory monitoring now tracks 2,400+ jurisdictions in real time</h2>
+        <div class="sb-wrap">
+          <div class="sb"><span class="sb-k">The problem:</span> Regulatory change velocity is accelerating — 45,000+ new rules across major jurisdictions in 2025 alone. No human team can track this comprehensively. Compliance gaps become enforcement actions.</div>
+          <div class="sb"><span class="sb-k">The solution:</span> AI platforms (Ascent, Reg-X, Clausematch) ingest regulatory feeds, map requirements to internal policies, flag gaps, and draft remediation plans — across 2,400+ jurisdictions simultaneously.</div>
+        </div>
+        <div class="case">
+          <div class="case-hdr">
+            <span class="case-lbl">Case Study</span>
+            <span class="case-co">Global Bank · 40 Jurisdictions</span>
+          </div>
+          <div class="case-body">
+            <p>Deployed AI regulatory monitoring across 40 jurisdictions. <strong>Identified 23 compliance gaps in month one that manual processes had missed. Average time from regulatory change to internal policy update: 72 hours vs. previous 4-6 months. Compliance team reduced from 28 to 12 while improving coverage.</strong></p>
+          </div>
+        </div>
+        <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+      </div>
+    </article>
+  </div>
+
+</section>
+
 </main>
 
 <!-- BOTTOM NAV -->
@@ -1195,6 +1800,12 @@ main { padding-bottom: 80px; }
     </div>
     <span class="bb-lbl">Overheard</span>
   </button>
+  <button class="bb" onclick="go('ind')">
+    <div class="bb-icon">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    </div>
+    <span class="bb-lbl">Industry</span>
+  </button>
 </nav>
 
 <script>
@@ -1211,7 +1822,15 @@ const yr = sunday.getFullYear();
 document.getElementById('hdr-date').textContent = `${mon} ${d} · #001`;
 document.getElementById('hero-date').textContent = `Sunday · ${mon} ${d}, ${yr}`;
 
-const order = ['ai','yc','vc','oh'];
+const order = ['ai','yc','vc','oh','ind'];
+
+const indNames = {
+  mktg: 'Marketing & Growth',
+  health: 'Healthcare',
+  fintech: 'Fintech',
+  retail: 'Retail & E-commerce',
+  legal: 'Legal'
+};
 
 function go(id) {
   const idx = order.indexOf(id);
@@ -1221,7 +1840,26 @@ function go(id) {
   document.querySelectorAll('.tab')[idx].classList.add('active');
   document.querySelectorAll('.bb').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.bb')[idx].classList.add('active');
+  // Reset industry view when switching to Industry tab or away
+  if (id === 'ind') backToIndustries();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goIndustry(id) {
+  document.getElementById('ind-grid').style.display = 'none';
+  document.getElementById('ind-detail').classList.add('active');
+  document.getElementById('ind-header').textContent = indNames[id];
+  document.querySelectorAll('.ind-content').forEach(c => c.classList.remove('active'));
+  document.getElementById('ind-' + id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function backToIndustries() {
+  document.getElementById('ind-grid').style.display = '';
+  document.getElementById('ind-detail').classList.remove('active');
+  document.querySelectorAll('.ind-content').forEach(c => c.classList.remove('active'));
+  // Close any open cards in industry sections
+  document.querySelectorAll('#s-ind .card.open').forEach(c => c.classList.remove('open'));
 }
 
 // Accordion — one open at a time per section

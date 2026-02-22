@@ -594,7 +594,7 @@ main { padding-bottom: 80px; }
     </div>
     <div class="logo-sub">AI brief for founders</div>
   </div>
-  <div class="hdr-date">Feb 22 · #001</div>
+  <div class="hdr-date" id="hdr-date"></div>
 </header>
 
 <!-- TABS -->
@@ -609,7 +609,7 @@ main { padding-bottom: 80px; }
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow">Sunday · Feb 22, 2026</div>
+  <div class="hero-eyebrow" id="hero-date"></div>
   <div class="hero-hed">Know what matters.<br><em>Every Sunday.</em></div>
   <div class="hero-deck">The AI brief for founders who don't have time for noise. Signal only — curated weekly across AI releases, YC startups, VC moves, and what's worth repeating at dinner.</div>
 
@@ -688,8 +688,8 @@ main { padding-bottom: 80px; }
           <p>A Series B fintech with no Salesforce API access deployed Claude Sonnet 4.6 to navigate their CRM UI, extract deal data, and populate their weekly revenue ops report. Previously 3 hours of manual work every Monday. <strong>Now fully automated, runs at 6am before the team wakes up. Total implementation: one afternoon.</strong></p>
         </div>
       </div>
-      <a href="https://techmeme.com/" target="_blank" class="c-link">Via Techmeme ↗</a>
-      <a href="https://radicaldatascience.wordpress.com/2026/02/20/ai-news-briefs-bulletin-board-for-february-2026/" target="_blank" class="c-link">Go deeper ↗</a><br>
+      <a href="https://www.anthropic.com/news/claude-sonnet-4-6" target="_blank" class="c-link">Anthropic Blog ↗</a>
+      <a href="https://techcrunch.com/2026/02/17/anthropic-releases-sonnet-4-6/" target="_blank" class="c-link">TechCrunch ↗</a><br>
       <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
     </div>
   </article>
@@ -722,8 +722,8 @@ main { padding-bottom: 80px; }
           <p>As Koyeb integrates, Mistral's inference pricing is likely to drop materially in Q2 2026. <strong>If you run high-volume, cost-sensitive workloads</strong> — support classification, document tagging, structured extraction — Mistral becomes significantly more interesting to benchmark.</p>
         </div>
       </div>
-      <a href="https://techmeme.com/" target="_blank" class="c-link">Via Techmeme ↗</a>
-      <a href="https://radicaldatascience.wordpress.com/2026/02/20/ai-news-briefs-bulletin-board-for-february-2026/" target="_blank" class="c-link">Go deeper ↗</a><br>
+      <a href="https://techcrunch.com/2026/02/17/mistral-ai-buys-koyeb-in-first-acquisition-to-back-its-cloud-ambitions/" target="_blank" class="c-link">TechCrunch ↗</a>
+      <a href="https://sifted.eu/articles/mistral-first-acquisition-koyeb" target="_blank" class="c-link">Sifted ↗</a><br>
       <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
     </div>
   </article>
@@ -756,7 +756,8 @@ main { padding-bottom: 80px; }
           <p>Synthesia embedded C2PA-compliant watermarks into all generated video exports in late 2025, ahead of enforcement. <strong>Enterprise customers in regulated EU industries now cite provenance certification as a procurement requirement.</strong> First mover on compliance became a competitive moat.</p>
         </div>
       </div>
-      <a href="https://www.fladgate.com/insights/ai-round-up-february-2026" target="_blank" class="c-link">Go deeper ↗</a><br>
+      <a href="https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content" target="_blank" class="c-link">EU Commission ↗</a>
+      <a href="https://www.fladgate.com/insights/ai-round-up-february-2026" target="_blank" class="c-link">Fladgate ↗</a><br>
       <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
     </div>
   </article>
@@ -789,8 +790,8 @@ main { padding-bottom: 80px; }
           <p>Before acquisition, Hume AI ran pilots with insurance call centers where their emotion API flagged customer frustration in real-time and auto-escalated to a human. <strong>First-call resolution improved 34%.</strong> That tech now lives inside Gemini. Test it in the next 90 days — before it's standard.</p>
         </div>
       </div>
-      <a href="https://techmeme.com/" target="_blank" class="c-link">Via Techmeme ↗</a>
-      <a href="https://www.fladgate.com/insights/ai-round-up-february-2026" target="_blank" class="c-link">Go deeper ↗</a><br>
+      <a href="https://the-decoder.com/google-deepmind-goes-on-acquisition-spree-with-three-ai-deals-in-one-week/" target="_blank" class="c-link">The Decoder ↗</a>
+      <a href="https://www.fladgate.com/insights/ai-round-up-february-2026" target="_blank" class="c-link">Fladgate ↗</a><br>
       <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
     </div>
   </article>
@@ -823,8 +824,8 @@ main { padding-bottom: 80px; }
           <p>A healthcare AI company processing 2M medical records/month migrated inference from Azure H100s to Cerebras Cloud in Q4 2025. <strong>Latency dropped 73%. Cost per record dropped 40%.</strong> At their volume — $180K in annual savings on one pipeline, reinvested into dataset licensing that improved model accuracy by 12 points.</p>
         </div>
       </div>
-      <a href="https://techmeme.com/" target="_blank" class="c-link">Via Techmeme ↗</a>
-      <a href="https://www.fladgate.com/insights/ai-round-up-february-2026" target="_blank" class="c-link">Go deeper ↗</a><br>
+      <a href="https://openai.com/index/cerebras-partnership/" target="_blank" class="c-link">OpenAI Blog ↗</a>
+      <a href="https://techcrunch.com/2026/01/14/openai-signs-deal-reportedly-worth-10-billion-for-compute-from-cerebras/" target="_blank" class="c-link">TechCrunch ↗</a><br>
       <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
     </div>
   </article>
@@ -1197,6 +1198,19 @@ main { padding-bottom: 80px; }
 </nav>
 
 <script>
+// Dynamic date — always shows the most recent Sunday
+const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const now = new Date();
+const day = now.getDay(); // 0=Sun
+const diff = day === 0 ? 0 : day; // days since last Sunday
+const sunday = new Date(now);
+sunday.setDate(now.getDate() - diff);
+const mon = months[sunday.getMonth()];
+const d = sunday.getDate();
+const yr = sunday.getFullYear();
+document.getElementById('hdr-date').textContent = `${mon} ${d} · #001`;
+document.getElementById('hero-date').textContent = `Sunday · ${mon} ${d}, ${yr}`;
+
 const order = ['ai','yc','vc','oh'];
 
 function go(id) {

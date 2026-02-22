@@ -605,9 +605,16 @@ main { padding-bottom: 80px; }
 .ind-chip:hover { border-color: var(--accent); }
 
 .ind-chip .ind-icon {
-  font-size: 20px;
-  line-height: 1;
   margin-bottom: 4px;
+}
+
+.ind-chip .ind-icon svg {
+  width: 20px; height: 20px;
+  stroke: var(--accent);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .ind-chip .ind-name {
@@ -1252,27 +1259,27 @@ main { padding-bottom: 80px; }
   <!-- Industry Grid -->
   <div class="ind-grid" id="ind-grid">
     <button class="ind-chip" onclick="goIndustry('mktg')">
-      <div class="ind-icon">📈</div>
+      <div class="ind-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
       <div class="ind-name">Marketing &amp; Growth</div>
       <div class="ind-sub">AI tools, attribution, content, personalization</div>
     </button>
     <button class="ind-chip" onclick="goIndustry('health')">
-      <div class="ind-icon">🏥</div>
+      <div class="ind-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4" y1="12" x2="4" y2="12"/></svg></div>
       <div class="ind-name">Healthcare</div>
       <div class="ind-sub">Clinical AI, diagnostics, revenue cycle</div>
     </button>
     <button class="ind-chip" onclick="goIndustry('fintech')">
-      <div class="ind-icon">💳</div>
+      <div class="ind-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
       <div class="ind-name">Fintech</div>
       <div class="ind-sub">Payments, lending, fraud, compliance</div>
     </button>
     <button class="ind-chip" onclick="goIndustry('retail')">
-      <div class="ind-icon">🛒</div>
+      <div class="ind-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
       <div class="ind-name">Retail &amp; E-commerce</div>
       <div class="ind-sub">Demand forecasting, personalization, ops</div>
     </button>
     <button class="ind-chip" onclick="goIndustry('legal')">
-      <div class="ind-icon">⚖️</div>
+      <div class="ind-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="15"/><polyline points="5 8 12 3 19 8"/><line x1="5" y1="8" x2="5" y2="15"/><line x1="19" y1="8" x2="19" y2="15"/><line x1="2" y1="15" x2="22" y2="15"/><line x1="2" y1="20" x2="22" y2="20"/><line x1="6" y1="15" x2="6" y2="20"/><line x1="18" y1="15" x2="18" y2="20"/></svg></div>
       <div class="ind-name">Legal</div>
       <div class="ind-sub">Contract AI, compliance, document review</div>
     </button>
@@ -1804,7 +1811,7 @@ main { padding-bottom: 80px; }
     <div class="bb-icon">
       <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
     </div>
-    <span class="bb-lbl">Industry</span>
+    <span class="bb-lbl">Sector</span>
   </button>
 </nav>
 

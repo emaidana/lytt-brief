@@ -169,55 +169,6 @@ body {
   font-weight: 400;
 }
 
-/* EMAIL CAPTURE */
-.email-form {
-  display: flex;
-  gap: 0;
-  margin-bottom: 20px;
-  border: 1px solid var(--line2);
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--white);
-  transition: border-color 0.2s;
-}
-.email-form:focus-within { border-color: var(--accent); }
-
-.email-input {
-  flex: 1;
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  color: var(--ink);
-  background: none;
-  border: none;
-  padding: 11px 14px;
-  outline: none;
-}
-.email-input::placeholder { color: var(--ink4); }
-
-.email-btn {
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--white);
-  background: var(--accent);
-  border: none;
-  padding: 11px 16px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: opacity 0.15s;
-  letter-spacing: 0.01em;
-}
-.email-btn:hover { opacity: 0.88; }
-.email-btn:active { opacity: 0.75; }
-
-.email-note {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 8.5px;
-  color: var(--ink5);
-  letter-spacing: 0.06em;
-  margin-bottom: 18px;
-}
-
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -579,114 +530,6 @@ body {
   color: var(--ink4);
 }
 
-/* ─── EMAIL MODAL ─── */
-.modal-bg {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(20,20,18,0.6);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  z-index: 200;
-  align-items: flex-end;
-  justify-content: center;
-}
-.modal-bg.show { display: flex; }
-
-.modal {
-  background: var(--white);
-  border-radius: 16px 16px 0 0;
-  padding: 28px 24px max(24px, env(safe-area-inset-bottom));
-  width: 100%;
-  max-width: 430px;
-  animation: slideUp 0.3s cubic-bezier(0.16,1,0.3,1);
-}
-
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to   { transform: translateY(0); }
-}
-
-.modal-handle {
-  width: 36px; height: 4px;
-  background: var(--line2);
-  border-radius: 2px;
-  margin: 0 auto 24px;
-}
-
-.modal-hed {
-  font-family: 'EB Garamond', serif;
-  font-size: 22px;
-  font-weight: 400;
-  color: var(--ink);
-  margin-bottom: 6px;
-  letter-spacing: -0.01em;
-}
-
-.modal-sub {
-  font-size: 13px;
-  color: var(--ink3);
-  line-height: 1.55;
-  margin-bottom: 20px;
-}
-
-.modal-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.modal-input {
-  width: 100%;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  color: var(--ink);
-  background: var(--off);
-  border: 1px solid var(--line2);
-  border-radius: 8px;
-  padding: 13px 16px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-.modal-input:focus { border-color: var(--accent); }
-.modal-input::placeholder { color: var(--ink4); }
-
-.modal-submit {
-  width: 100%;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--white);
-  background: var(--accent);
-  border: none;
-  border-radius: 8px;
-  padding: 14px;
-  cursor: pointer;
-  transition: opacity 0.15s;
-  letter-spacing: 0.01em;
-}
-.modal-submit:hover { opacity: 0.88; }
-
-.modal-note {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
-  color: var(--ink5);
-  letter-spacing: 0.06em;
-  text-align: center;
-  margin-top: 4px;
-}
-
-.modal-close {
-  position: absolute;
-  top: 16px; right: 20px;
-  font-size: 20px;
-  color: var(--ink4);
-  background: none;
-  border: none;
-  cursor: pointer;
-  line-height: 1;
-}
-
 /* ─── BOTTOM NAV ─── */
 .bnav {
   position: fixed;
@@ -738,28 +581,6 @@ body {
 main { padding-bottom: 80px; }
 ::-webkit-scrollbar { width: 0; }
 
-/* Success state */
-.success-msg {
-  display: none;
-  text-align: center;
-  padding: 16px 0;
-}
-.success-msg.show { display: block; }
-.success-icon {
-  font-size: 32px;
-  margin-bottom: 10px;
-}
-.success-hed {
-  font-family: 'EB Garamond', serif;
-  font-size: 20px;
-  color: var(--ink);
-  margin-bottom: 6px;
-}
-.success-sub {
-  font-size: 13px;
-  color: var(--ink3);
-  line-height: 1.55;
-}
 </style>
 </head>
 <body>
@@ -778,10 +599,10 @@ main { padding-bottom: 80px; }
 
 <!-- TABS -->
 <div class="tabs">
-  <button class="tab active" onclick="go('ai',this)">AI Brief</button>
-  <button class="tab" onclick="go('yc',this)">YC Watch</button>
-  <button class="tab" onclick="go('vc',this)">VC Moves</button>
-  <button class="tab" onclick="go('oh',this)">Overheard</button>
+  <button class="tab active" onclick="go('ai')">AI Brief</button>
+  <button class="tab" onclick="go('yc')">YC Watch</button>
+  <button class="tab" onclick="go('vc')">VC Moves</button>
+  <button class="tab" onclick="go('oh')">Overheard</button>
 </div>
 
 <main>
@@ -791,13 +612,6 @@ main { padding-bottom: 80px; }
   <div class="hero-eyebrow">Sunday · Feb 23, 2026</div>
   <div class="hero-hed">Know what matters.<br><em>Every Sunday.</em></div>
   <div class="hero-deck">The AI brief for founders who don't have time for noise. Signal only — curated weekly across AI releases, YC startups, VC moves, and what's worth repeating at dinner.</div>
-
-  <!-- EMAIL CAPTURE -->
-  <div class="email-form">
-    <input class="email-input" type="email" placeholder="your@email.com" id="heroEmail">
-    <button class="email-btn" onclick="openModal()">Get Sunday Brief</button>
-  </div>
-  <div class="email-note">Free. Every Sunday morning. No spam, ever.</div>
 
   <div class="chips">
     <div class="chip"><b>6</b> AI signals</div>
@@ -1354,49 +1168,27 @@ main { padding-bottom: 80px; }
 
 </main>
 
-<!-- EMAIL MODAL -->
-<div class="modal-bg" id="emailModal" onclick="closeModalBg(event)">
-  <div class="modal" style="position:relative;">
-    <div class="modal-handle"></div>
-    <div id="modalForm">
-      <div class="modal-hed">Get the Sunday Brief.</div>
-      <div class="modal-sub">Every Sunday morning — the AI signals, YC startups, and VC moves that serious founders actually need. Free, forever.</div>
-      <div class="modal-form">
-        <input class="modal-input" type="text" placeholder="First name" id="modalName">
-        <input class="modal-input" type="email" placeholder="Work email" id="modalEmail">
-        <button class="modal-submit" onclick="subscribe()">Subscribe — It's Free</button>
-        <div class="modal-note">No spam. Unsubscribe anytime. Delivered Sunday 7am PT.</div>
-      </div>
-    </div>
-    <div class="success-msg" id="successMsg">
-      <div class="success-icon">✦</div>
-      <div class="success-hed">You're in.</div>
-      <div class="success-sub">Your first Lytt brief lands this Sunday at 7am PT. Forward it to one founder who'd appreciate it.</div>
-    </div>
-  </div>
-</div>
-
 <!-- BOTTOM NAV -->
 <nav class="bnav">
-  <button class="bb active" onclick="go('ai',this)">
+  <button class="bb active" onclick="go('ai')">
     <div class="bb-icon">
       <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
     </div>
     <span class="bb-lbl">AI Brief</span>
   </button>
-  <button class="bb" onclick="go('yc',this)">
+  <button class="bb" onclick="go('yc')">
     <div class="bb-icon">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
     </div>
     <span class="bb-lbl">YC Watch</span>
   </button>
-  <button class="bb" onclick="go('vc',this)">
+  <button class="bb" onclick="go('vc')">
     <div class="bb-icon">
       <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
     </div>
     <span class="bb-lbl">VC Moves</span>
   </button>
-  <button class="bb" onclick="go('oh',this)">
+  <button class="bb" onclick="go('oh')">
     <div class="bb-icon">
       <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     </div>
@@ -1407,13 +1199,14 @@ main { padding-bottom: 80px; }
 <script>
 const order = ['ai','yc','vc','oh'];
 
-function go(id, el) {
+function go(id) {
+  const idx = order.indexOf(id);
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById('s-' + id).classList.add('active');
   document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab')[order.indexOf(id)].classList.add('active');
+  document.querySelectorAll('.tab')[idx].classList.add('active');
   document.querySelectorAll('.bb').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
+  document.querySelectorAll('.bb')[idx].classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1436,40 +1229,6 @@ function toggleCard(btn) {
   }
 }
 
-// Email modal
-function openModal() {
-  const heroEmail = document.getElementById('heroEmail').value;
-  if (heroEmail) document.getElementById('modalEmail').value = heroEmail;
-  document.getElementById('emailModal').classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModalBg(e) {
-  if (e.target === document.getElementById('emailModal')) closeModal();
-}
-
-function closeModal() {
-  document.getElementById('emailModal').classList.remove('show');
-  document.body.style.overflow = '';
-}
-
-function subscribe() {
-  const email = document.getElementById('modalEmail').value;
-  if (!email || !email.includes('@')) {
-    document.getElementById('modalEmail').focus();
-    document.getElementById('modalEmail').style.borderColor = '#C92A2A';
-    return;
-  }
-  // Show success
-  document.getElementById('modalForm').style.display = 'none';
-  document.getElementById('successMsg').classList.add('show');
-  setTimeout(closeModal, 3200);
-}
-
-// Keyboard: ESC closes modal
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-});
 </script>
 </body>
 </html>

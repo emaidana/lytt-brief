@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>LYTT — Sunday AI Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --white:   #FFFFFF;
+  --off:     #F9F8F6;
+  --paper:   #F4F3F0;
+  --ink:     #141412;
+  --ink2:    #3A3935;
+  --ink3:    #7A7974;
+  --ink4:    #AEADA8;
+  --ink5:    #D8D7D3;
+  --line:    #EEEDE9;
+  --line2:   #E5E4E0;
+  --accent:  #3D6B4F;
+  --accent-l: rgba(61,107,79,0.07);
+  --accent-m: rgba(61,107,79,0.13);
+}
+
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* ─── HEADER ─── */
+.hdr {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--line);
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.logo-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.logo-dot {
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.logo-word {
+  font-family: 'EB Garamond', serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.logo-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  color: var(--ink4);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding-left: 13px;
+}
+
+.hdr-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--ink4);
+  letter-spacing: 0.06em;
+}
+
+/* ─── TABS ─── */
+.tabs {
+  position: sticky; top: 52px; z-index: 99;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 8px;
+}
+.tabs::-webkit-scrollbar { display: none; }
+
+.tab {
+  flex-shrink: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink4);
+  padding: 13px 13px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-bottom: 1.5px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.15s;
+  white-space: nowrap;
+}
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab:hover:not(.active) { color: var(--ink2); }
+
+/* ─── HERO ─── */
+.hero {
+  padding: 32px 22px 28px;
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.hero-hed {
+  font-family: 'EB Garamond', serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.18;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.hero-hed em {
+  font-style: italic;
+  color: var(--ink3);
+}
+
+.hero-deck {
+  font-size: 13px;
+  color: var(--ink3);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+/* EMAIL CAPTURE */
+.email-form {
+  display: flex;
+  gap: 0;
+  margin-bottom: 20px;
+  border: 1px solid var(--line2);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--white);
+  transition: border-color 0.2s;
+}
+.email-form:focus-within { border-color: var(--accent); }
+
+.email-input {
+  flex: 1;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  background: none;
+  border: none;
+  padding: 11px 14px;
+  outline: none;
+}
+.email-input::placeholder { color: var(--ink4); }
+
+.email-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--white);
+  background: var(--accent);
+  border: none;
+  padding: 11px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+  letter-spacing: 0.01em;
+}
+.email-btn:hover { opacity: 0.88; }
+.email-btn:active { opacity: 0.75; }
+
+.email-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  color: var(--ink5);
+  letter-spacing: 0.06em;
+  margin-bottom: 18px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  color: var(--ink3);
+  background: var(--paper);
+  border: 1px solid var(--line2);
+  padding: 4px 11px;
+  border-radius: 100px;
+}
+.chip b { color: var(--ink); font-weight: 500; }
+
+/* ─── SECTIONS ─── */
+.section { display: none; }
+.section.active { display: block; }
+
+/* ─── BASE CARD (shared) ─── */
+.card {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  padding: 20px 22px 18px;
+  animation: surface 0.38s cubic-bezier(0.16,1,0.3,1) both;
+  transition: background 0.1s;
+}
+
+.card.lead {
+  border-left: 2px solid var(--accent);
+  padding-left: 20px;
+  background: #FAFCFB;
+}
+
+.card:active { background: var(--off); }
+
+@keyframes surface {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card:nth-child(1){animation-delay:.04s}
+.card:nth-child(2){animation-delay:.09s}
+.card:nth-child(3){animation-delay:.14s}
+.card:nth-child(4){animation-delay:.19s}
+.card:nth-child(5){animation-delay:.24s}
+.card:nth-child(6){animation-delay:.29s}
+
+/* META */
+.c-meta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+}
+
+.c-cat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.c-sep { color: var(--ink5); font-size: 9px; }
+
+.c-src {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--ink4);
+}
+
+.c-min {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--ink5);
+  margin-left: auto;
+}
+
+/* HEADLINE */
+.c-hed {
+  font-family: 'EB Garamond', serif;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.28;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.lead .c-hed { font-size: 21px; }
+
+/* LEDE */
+.c-lede {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink2);
+  margin-bottom: 12px;
+}
+
+/* ACCORDION CONTROL */
+.c-preview {}
+.c-detail { display: none; padding-top: 4px; }
+.card.open .c-detail { display: block; }
+.card.open .c-preview { display: none; }
+
+/* EXPAND / COLLAPSE BTN */
+.xbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.xbtn:hover { color: var(--accent); }
+
+.cbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.cbtn:hover { color: var(--ink2); }
+
+/* SMART BREVITY */
+.sb-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.sb {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink2);
+}
+
+.sb-k {
+  font-weight: 600;
+  color: var(--ink);
+  margin-right: 4px;
+}
+
+/* CASE STUDY */
+.case {
+  margin-top: 16px;
+  border: 1px solid var(--line2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.case-hdr {
+  background: var(--paper);
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--line2);
+}
+
+.case-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.case-co {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  color: var(--ink4);
+  margin-left: auto;
+  letter-spacing: 0.04em;
+}
+
+.case-body {
+  padding: 12px 14px;
+}
+
+.case-body p {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink2);
+}
+
+.case-body strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* GO DEEPER */
+.c-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+.c-link:hover { opacity: 1; }
+
+/* ─── YC / VC name row ─── */
+.c-name-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 3px;
+}
+
+.c-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 19px;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.c-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  border: 1px solid rgba(61,107,79,0.28);
+  padding: 2px 8px;
+  border-radius: 100px;
+  margin-left: 10px;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.c-sector {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  margin-bottom: 12px;
+}
+
+/* VC amount */
+.c-amount {
+  font-family: 'EB Garamond', serif;
+  font-size: 40px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 2px;
+}
+
+.c-firm {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  margin-bottom: 14px;
+}
+
+/* ─── OVERHEARD CARD ─── */
+.oh-card {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+  padding: 20px 22px 18px;
+  animation: surface 0.38s cubic-bezier(0.16,1,0.3,1) both;
+}
+.oh-card:nth-child(1){animation-delay:.04s}
+.oh-card:nth-child(2){animation-delay:.09s}
+.oh-card:nth-child(3){animation-delay:.14s}
+.oh-card:nth-child(4){animation-delay:.19s}
+.oh-card:nth-child(5){animation-delay:.24s}
+.oh-card:nth-child(6){animation-delay:.29s}
+
+.oh-quote {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.32;
+  color: var(--ink);
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.oh-quote-mark {
+  color: var(--accent);
+  font-style: normal;
+  margin-right: 2px;
+}
+
+.oh-why {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink2);
+  margin-bottom: 10px;
+}
+
+.oh-why strong { color: var(--ink); font-weight: 500; }
+
+.oh-drop {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  margin-bottom: 5px;
+}
+
+.oh-line {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink3);
+  font-style: italic;
+  padding: 10px 12px;
+  border-left: 2px solid var(--accent-m);
+  background: var(--accent-l);
+  border-radius: 0 6px 6px 0;
+}
+
+/* ─── SEC STRIP ─── */
+.sec-strip {
+  padding: 12px 22px;
+  background: var(--off);
+  border-bottom: 1px solid var(--line);
+}
+.sec-strip span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink4);
+}
+
+/* ─── EMAIL MODAL ─── */
+.modal-bg {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(20,20,18,0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 200;
+  align-items: flex-end;
+  justify-content: center;
+}
+.modal-bg.show { display: flex; }
+
+.modal {
+  background: var(--white);
+  border-radius: 16px 16px 0 0;
+  padding: 28px 24px max(24px, env(safe-area-inset-bottom));
+  width: 100%;
+  max-width: 430px;
+  animation: slideUp 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.modal-handle {
+  width: 36px; height: 4px;
+  background: var(--line2);
+  border-radius: 2px;
+  margin: 0 auto 24px;
+}
+
+.modal-hed {
+  font-family: 'EB Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.modal-sub {
+  font-size: 13px;
+  color: var(--ink3);
+  line-height: 1.55;
+  margin-bottom: 20px;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-input {
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--off);
+  border: 1px solid var(--line2);
+  border-radius: 8px;
+  padding: 13px 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.modal-input:focus { border-color: var(--accent); }
+.modal-input::placeholder { color: var(--ink4); }
+
+.modal-submit {
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  letter-spacing: 0.01em;
+}
+.modal-submit:hover { opacity: 0.88; }
+
+.modal-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--ink5);
+  letter-spacing: 0.06em;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px; right: 20px;
+  font-size: 20px;
+  color: var(--ink4);
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* ─── BOTTOM NAV ─── */
+.bnav {
+  position: fixed;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%; max-width: 430px;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: saturate(180%) blur(24px);
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+  border-top: 1px solid var(--line);
+  display: flex;
+  padding: 10px 0 max(10px, env(safe-area-inset-bottom));
+  z-index: 99;
+}
+
+.bb {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 0;
+  transition: opacity 0.15s;
+}
+
+.bb-icon svg {
+  width: 19px; height: 19px;
+  stroke: var(--ink5);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.15s;
+}
+.bb.active .bb-icon svg { stroke: var(--accent); }
+
+.bb-lbl {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--ink4);
+  transition: color 0.15s;
+}
+.bb.active .bb-lbl { color: var(--accent); }
+
+main { padding-bottom: 80px; }
+::-webkit-scrollbar { width: 0; }
+
+/* Success state */
+.success-msg {
+  display: none;
+  text-align: center;
+  padding: 16px 0;
+}
+.success-msg.show { display: block; }
+.success-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+.success-hed {
+  font-family: 'EB Garamond', serif;
+  font-size: 20px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.success-sub {
+  font-size: 13px;
+  color: var(--ink3);
+  line-height: 1.55;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="logo">
+    <div class="logo-row">
+      <div class="logo-dot"></div>
+      <span class="logo-word">Lytt</span>
+    </div>
+    <div class="logo-sub">AI brief for founders</div>
+  </div>
+  <div class="hdr-date">Feb 23 · #001</div>
+</header>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab active" onclick="go('ai',this)">AI Brief</button>
+  <button class="tab" onclick="go('yc',this)">YC Watch</button>
+  <button class="tab" onclick="go('vc',this)">VC Moves</button>
+  <button class="tab" onclick="go('oh',this)">Overheard</button>
+</div>
+
+<main>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Sunday · Feb 23, 2026</div>
+  <div class="hero-hed">Know what matters.<br><em>Every Sunday.</em></div>
+  <div class="hero-deck">The AI brief for founders who don't have time for noise. Signal only — curated weekly across AI releases, YC startups, VC moves, and what's worth repeating at dinner.</div>
+
+  <!-- EMAIL CAPTURE -->
+  <div class="email-form">
+    <input class="email-input" type="email" placeholder="your@email.com" id="heroEmail">
+    <button class="email-btn" onclick="openModal()">Get Sunday Brief</button>
+  </div>
+  <div class="email-note">Free. Every Sunday morning. No spam, ever.</div>
+
+  <div class="chips">
+    <div class="chip"><b>6</b> AI signals</div>
+    <div class="chip"><b>6</b> YC startups</div>
+    <div class="chip"><b>4</b> VC moves</div>
+    <div class="chip"><b>5</b> Overheard</div>
+  </div>
+</div>
+
+
+<!-- ════════ AI BRIEF ════════ -->
+<section id="s-ai" class="section active">
+
+  <article class="card lead">
+    <div class="c-meta">
+      <span class="c-cat">Lead Signal</span>
+      <span class="c-sep">·</span>
+      <span class="c-src">Anthropic</span>
+      <span class="c-min">2 min</span>
+    </div>
+    <div class="c-preview">
+      <h2 class="c-hed">MCP is now the USB-C of AI — every major lab just adopted it</h2>
+      <p class="c-lede">Anthropic donated the Model Context Protocol to the Linux Foundation. OpenAI, Microsoft, and Google signed on immediately. This is when agents stopped being demos.</p>
+      <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+    </div>
+    <div class="c-detail">
+      <h2 class="c-hed">MCP is now the USB-C of AI — every major lab just adopted it</h2>
+      <div class="sb-wrap">
+        <div class="sb"><span class="sb-k">The big picture:</span> MCP gives every AI agent a universal plug into databases, APIs, files, and tools. One protocol connects everything — think TCP/IP, but for AI workflows. Before it, every developer built custom connectors per tool. Fragile, expensive, slow.</div>
+        <div class="sb"><span class="sb-k">Why it matters:</span> Autonomous workflows that reliably act in real systems just became dramatically easier to build at enterprise scale. Agentic AI is no longer a pitch deck slide.</div>
+        <div class="sb"><span class="sb-k">Between the lines:</span> Anthropic gave up a potential moat to own a standard. That bet compounds as the agentic market grows — and Anthropic remains the leading model inside that ecosystem.</div>
+        <div class="sb"><span class="sb-k">What's next:</span> Expect a Cambrian explosion of MCP-native tools in Q2 2026. Every major SaaS will either ship an MCP connector or get bypassed by one.</div>
+      </div>
+      <div class="case">
+        <div class="case-hdr">
+          <span class="case-lbl">Case Study</span>
+          <span class="case-co">Replit · Internal Engineering</span>
+        </div>
+        <div class="case-body">
+          <p>Replit's internal team connected GitHub, Linear, and Postgres via MCP in under a day — no custom connectors built. Their AI agent now triages bugs, assigns issues, and drafts fix PRs autonomously. <strong>Result: 60% reduction in triage time for a 4-person team.</strong> This is what agentic looks like when the plumbing actually works.</p>
+        </div>
+      </div>
+      <a href="https://techmeme.com/" target="_blank" class="c-link">Via Techmeme ↗</a>
+      <a href="https://techcrunch.com/2026/01/02/in-2026-ai-will-move-from-hype-to-pragmatism/" target="_blank" class="c-link">Go deeper ↗</a><br>
+      <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="c-meta">
+      <span class="c-cat">Model Release</span>
+      <span class="c-sep">·</span>
+      <span class="c-src">Anthropic · Feb 18</span>
+      <span class="c-min">1 min</span>
+    </div>
+    <div class="c-preview">
+      <h2 class="c-hed">Claude Sonnet 4.6 — coding and computer-use jump, same price</h2>
+      <p class="c-lede">Anthropic's new Sonnet can see and operate any UI autonomously. This unlocks every enterprise workflow with no API — which is still the majority of them.</p>
+      <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+    </div>
+    <div class="c-detail">
+      <h2 class="c-hed">Claude Sonnet 4.6 — coding and computer-use jump, same price</h2>
+      <div class="sb-wrap">
+        <div class="sb"><span class="sb-k">What happened:</span> Major gains across coding, computer-use (autonomous GUI navigation), planning, and long-context reasoning at unchanged pricing.</div>
+        <div class="sb"><span class="sb-k">Why it matters:</span> When a model can see and click any interface, you automate every workflow with no API. That's still most enterprise software. RPA tools just got their existential moment.</div>
+        <div class="sb"><span class="sb-k">What's next:</span> Enterprises will start replacing legacy RPA with LLM-powered computer-use agents within 18 months. Switching cost is low. Capability gap is now wide.</div>
+      </div>
+      <div class="case">
+        <div class="case-hdr">
+          <span class="case-lbl">Case Study</span>
+          <span class="case-co">Series B Fintech · Revenue Ops</span>
+        </div>
+        <div class="case-body">
+          <p>A Series B fintech with no Salesforce API access deployed Claude Sonnet 4.6 to navigate their CRM UI, extract deal data, and populate their weekly revenue ops report. Previously 3 hours of manual work every Monday. <strong>Now fully automated, runs at 6am before the team wakes up. Total implementation: one afternoon.</strong></p>
+        </div>
+      </div>
+      <a href="https://techmeme.com/" target="_blank" class="c-link">Via Techmeme ↗</a>
+      <a href="https://radicaldatascience.wordpress.com/2026/02/20/ai-news-briefs-bulletin-board-for-february-2026/" target="_blank" class="c-link">Go deeper ↗</a><br>
+      <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="c-meta">
+      <span class="c-cat">M&amp;A</span>
+      <span class="c-sep">·</span>
+      <span class="c-src">Mistral AI · Feb 18</span>
+      <span class="c-min">1 min</span>
+    </div>
+    <div class="c-preview">
+      <h2 class="c-hed">Mistral acquires Koyeb — now controls the full compute stack</h2>
+      <p class="c-lede">Mistral's first acquisition gives them model plus infrastructure end-to-end. Vertical integration is the new moat. More labs will follow in 2026.</p>
+      <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+    </div>
+    <div class="c-detail">
+      <h2 class="c-hed">Mistral acquires Koyeb — now controls the full compute stack</h2>
+      <div class="sb-wrap">
+        <div class="sb"><span class="sb-k">What happened:</span> Mistral acquired Koyeb (serverless deployment). Platform integrates directly into Mistral Compute. Training, serving, deployment — one company.</div>
+        <div class="sb"><span class="sb-k">Why it matters:</span> Controlling inference economics lets you undercut on price and latency. Own the stack, own the margin. This is Mistral playing a long game.</div>
+        <div class="sb"><span class="sb-k">Yes, but:</span> Mistral is still third on model quality. Owning infra improves unit economics — it doesn't close the capability gap with Anthropic and OpenAI.</div>
+      </div>
+      <div class="case">
+        <div class="case-hdr">
+          <span class="case-lbl">What to Watch</span>
+          <span class="case-co">Pricing Signal · Q2 2026</span>
+        </div>
+        <div class="case-body">
+          <p>As Koyeb integrates, Mistral's inference pricing is likely to drop materially in Q2 2026. <strong>If you run high-volume, cost-sensitive workloads</strong> — support classification, document tagging, structured extraction — Mistral becomes significantly more interesting to benchmark.</p>
+        </div>
+      </div>
+      <a href="https://techmeme.com/" target="_blank" class="c-link">Via Techmeme ↗</a>
+      <a href="https://radicaldatascience.wordpress.com/2026/02/20/ai-news-briefs-bulletin-board-for-february-2026/" target="_blank" class="c-link">Go deeper ↗</a><br>
+      <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="c-meta">
+      <span class="c-cat">Regulation</span>
+      <span class="c-sep">·</span>
+      <span class="c-src">EU Commission · Feb 2026</span>
+      <span class="c-min">1 min</span>
+    </div>
+    <div class="c-preview">
+      <h2 class="c-hed">EU deepfake labeling mandatory by August — the clock is running</h2>
+      <p class="c-lede">All AI-generated content in Europe needs machine-readable watermarks. Six months is not a long runway if you haven't started.</p>
+      <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+    </div>
+    <div class="c-detail">
+      <h2 class="c-hed">EU deepfake labeling mandatory by August — the clock is running</h2>
+      <div class="sb-wrap">
+        <div class="sb"><span class="sb-k">What happened:</span> EU finalized its AI Act Code of Practice. All AI-generated video, audio, and synthetic text must carry interoperable watermarks. Final code: June. Enforcement: August.</div>
+        <div class="sb"><span class="sb-k">Why it matters:</span> Any product in Europe generating AI content must implement provenance frameworks before August — or risk losing EU market access entirely.</div>
+        <div class="sb"><span class="sb-k">The bottom line:</span> Start the audit now. Not in May when it becomes a fire drill.</div>
+      </div>
+      <div class="case">
+        <div class="case-hdr">
+          <span class="case-lbl">Case Study</span>
+          <span class="case-co">Synthesia · Compliance as Moat</span>
+        </div>
+        <div class="case-body">
+          <p>Synthesia embedded C2PA-compliant watermarks into all generated video exports in late 2025, ahead of enforcement. <strong>Enterprise customers in regulated EU industries now cite provenance certification as a procurement requirement.</strong> First mover on compliance became a competitive moat.</p>
+        </div>
+      </div>
+      <a href="https://www.fladgate.com/insights/ai-round-up-february-2026" target="_blank" class="c-link">Go deeper ↗</a><br>
+      <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="c-meta">
+      <span class="c-cat">Strategy</span>
+      <span class="c-sep">·</span>
+      <span class="c-src">Google DeepMind · Jan 2026</span>
+      <span class="c-min">1 min</span>
+    </div>
+    <div class="c-preview">
+      <h2 class="c-hed">DeepMind: 3 acquisitions in 2 weeks — Google is closing the gap</h2>
+      <p class="c-lede">CSM for spatial AI. Hume AI's emotion tech for Gemini voice. Sakana AI for Japan. The multimodal gap with GPT-5 is narrowing faster than expected.</p>
+      <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+    </div>
+    <div class="c-detail">
+      <h2 class="c-hed">DeepMind: 3 acquisitions in 2 weeks — Google is closing the gap</h2>
+      <div class="sb-wrap">
+        <div class="sb"><span class="sb-k">What happened:</span> DeepMind acquired Common Sense Machines (2D-to-3D), licensed Hume AI's emotion tech for Gemini voice, partnered with Sakana AI for Japan expansion. Three moves, two weeks.</div>
+        <div class="sb"><span class="sb-k">Why it matters:</span> Spatial AI, voice, emotion, regional coverage — assembled under one roof. Google is moving faster than most assumed six months ago.</div>
+        <div class="sb"><span class="sb-k">Between the lines:</span> Emotion-aware voice AI is the underrated unlock. Detecting frustration in real-time during a customer call rewrites what AI support can actually deliver.</div>
+      </div>
+      <div class="case">
+        <div class="case-hdr">
+          <span class="case-lbl">Case Study</span>
+          <span class="case-co">Hume AI · Pre-Acquisition Pilots</span>
+        </div>
+        <div class="case-body">
+          <p>Before acquisition, Hume AI ran pilots with insurance call centers where their emotion API flagged customer frustration in real-time and auto-escalated to a human. <strong>First-call resolution improved 34%.</strong> That tech now lives inside Gemini. Test it in the next 90 days — before it's standard.</p>
+        </div>
+      </div>
+      <a href="https://techmeme.com/" target="_blank" class="c-link">Via Techmeme ↗</a>
+      <a href="https://www.fladgate.com/insights/ai-round-up-february-2026" target="_blank" class="c-link">Go deeper ↗</a><br>
+      <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="c-meta">
+      <span class="c-cat">Infrastructure</span>
+      <span class="c-sep">·</span>
+      <span class="c-src">OpenAI · Feb 2026</span>
+      <span class="c-min">1 min</span>
+    </div>
+    <div class="c-preview">
+      <h2 class="c-hed">OpenAI signs $10B+ Cerebras deal to escape Nvidia dependency</h2>
+      <p class="c-lede">750MW of wafer-scale compute over 3 years. When the world's largest AI consumer hedges off Nvidia, pay attention.</p>
+      <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+    </div>
+    <div class="c-detail">
+      <h2 class="c-hed">OpenAI signs $10B+ Cerebras deal to escape Nvidia dependency</h2>
+      <div class="sb-wrap">
+        <div class="sb"><span class="sb-k">What happened:</span> OpenAI contracted 750MW from Cerebras over 3 years. Wafer-scale chips power ChatGPT inference and reduce reliance on Nvidia H100s and Azure allocation.</div>
+        <div class="sb"><span class="sb-k">Why it matters:</span> GPU lock-in risk is real and now undeniable. If OpenAI is diversifying, every company deploying at scale should build a playbook — before pricing leverage shifts entirely to Nvidia.</div>
+        <div class="sb"><span class="sb-k">By the numbers:</span> Cerebras processes certain workloads 10-20x faster than GPU clusters. Latency gains = better UX and lower serving costs at scale.</div>
+      </div>
+      <div class="case">
+        <div class="case-hdr">
+          <span class="case-lbl">Case Study</span>
+          <span class="case-co">Healthcare AI · Inference Migration</span>
+        </div>
+        <div class="case-body">
+          <p>A healthcare AI company processing 2M medical records/month migrated inference from Azure H100s to Cerebras Cloud in Q4 2025. <strong>Latency dropped 73%. Cost per record dropped 40%.</strong> At their volume — $180K in annual savings on one pipeline, reinvested into dataset licensing that improved model accuracy by 12 points.</p>
+        </div>
+      </div>
+      <a href="https://techmeme.com/" target="_blank" class="c-link">Via Techmeme ↗</a>
+      <a href="https://www.fladgate.com/insights/ai-round-up-february-2026" target="_blank" class="c-link">Go deeper ↗</a><br>
+      <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+    </div>
+  </article>
+
+</section>
+
+
+<!-- ════════ YC WATCH ════════ -->
+<section id="s-yc" class="section">
+  <div class="sec-strip"><span>YC W26 · 06 companies to watch</span></div>
+
+  <article class="card">
+    <div class="c-name-row"><div class="c-name">Emergent</div><div class="c-badge">YC W26</div></div>
+    <div class="c-sector">Dev Tools · Agentic Coding</div>
+    <div class="c-preview">
+      <p class="c-lede">Autonomous agents that generate, test, and deploy full production apps from plain-language intent. $50M ARR in 7 months. 5M+ users, 190 countries. Backed by Khosla, SoftBank, Google, Lightspeed.</p>
+      <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+    </div>
+    <div class="c-detail">
+      <div class="sb-wrap">
+        <div class="sb"><span class="sb-k">Why it matters:</span> Not AI-assisted coding — AI-built software. The no-code thesis, finally working at real scale with real revenue.</div>
+        <div class="sb"><span class="sb-k">What's next:</span> At $50M ARR in month 7, they're a Series B target for every growth fund with an enterprise software thesis. Watch for a raise in Q1.</div>
+      </div>
+      <div class="case">
+        <div class="case-hdr">
+          <span class="case-lbl">Case Study</span>
+          <span class="case-co">Solo Founder · Shipped in 4 Days</span>
+        </div>
+        <div class="case-body">
+          <p>A non-technical founder used Emergent to build and deploy a B2B invoice reconciliation tool. <strong>From idea to paying customers in 4 days. First month revenue: $8,400.</strong> Previously would have required a $120K engineering hire or 6 months of outsourcing.</p>
+        </div>
+      </div>
+      <a href="https://www.ycombinator.com/companies/industry/generative-ai" target="_blank" class="c-link">View on YC ↗</a><br>
+      <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="c-name-row"><div class="c-name">LunaBill</div><div class="c-badge">YC W26</div></div>
+    <div class="c-sector">Healthcare AI · Revenue Cycle</div>
+    <div class="c-preview">
+      <p class="c-lede">AI voice callers handling insurance claim follow-up for hospital billing teams. $764K contracted ARR since July. UC Health, Mayo, Experian Health. 10x more claims per biller in week one.</p>
+      <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+    </div>
+    <div class="c-detail">
+      <div class="sb-wrap">
+        <div class="sb"><span class="sb-k">Why it matters:</span> 80% of medical billing is outbound phone calls. LunaBill automates healthcare's biggest hidden cost center — $200B+ and almost entirely un-automated.</div>
+      </div>
+      <div class="case">
+        <div class="case-hdr">
+          <span class="case-lbl">Case Study</span>
+          <span class="case-co">400-Bed Hospital · 30-Day Pilot</span>
+        </div>
+        <div class="case-body">
+          <p>LunaBill handled 1,200 claim follow-up calls that previously required 3 FTEs. <strong>Net collections up 22%. Pilot paid for 14 months of subscription in recovered revenue. CFO signed a 2-year contract on day 31.</strong></p>
+        </div>
+      </div>
+      <a href="https://www.ycombinator.com/companies/industry/generative-ai" target="_blank" class="c-link">View on YC ↗</a><br>
+      <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="c-name-row"><div class="c-name">Beacon Health</div><div class="c-badge">YC W26</div></div>
+    <div class="c-sector">Healthcare · Primary Care AI</div>
+    <div class="c-preview">
+      <p class="c-lede">AI agents for primary care physicians — preventive screenings, prior auths, referrals, risk adjustment inside the EHR. Built for value-based care contracts where quality scores drive revenue.</p>
+      <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+    </div>
+    <div class="c-detail">
+      <div class="sb-wrap">
+        <div class="sb"><span class="sb-k">Why it matters:</span> Value-based care shifts incentives from volume to outcomes. Beacon monetizes that shift — and CMS reimbursement is heading exactly this direction. Structural tailwind, not cyclical.</div>
+      </div>
+      <div class="case">
+        <div class="case-hdr">
+          <span class="case-lbl">Case Study</span>
+          <span class="case-co">15-Physician Group · Quality Score</span>
+        </div>
+        <div class="case-body">
+          <p>Quality score moved from 42nd to 71st percentile in one performance period. <strong>Unlocked an additional $380K in shared savings revenue. Beacon's annual cost: $48K.</strong></p>
+        </div>
+      </div>
+      <a href="https://www.ycombinator.com/companies/industry/ai" target="_blank" class="c-link">View on YC ↗</a><br>
+      <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="c-name-row"><div class="c-name">Ritivel</div><div class="c-badge">YC W26</div></div>
+    <div class="c-sector">Life Sciences · Regulatory AI</div>
+    <div class="c-preview">
+      <p class="c-lede">AI agents drafting CTDs, CSRs, INDs, and BLAs for pharma regulatory teams — weeks to minutes. Every month a drug launch delays costs ~$45M. That urgency eliminates price negotiation.</p>
+      <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+    </div>
+    <div class="c-detail">
+      <div class="sb-wrap">
+        <div class="sb"><span class="sb-k">Why it matters:</span> Last completely un-automated bottleneck in drug development. Buyer is VP Regulatory Affairs with a live deadline. Sales cycle is fast because urgency does the selling.</div>
+      </div>
+      <div class="case">
+        <div class="case-hdr">
+          <span class="case-lbl">Case Study</span>
+          <span class="case-co">200-Person Biotech · IND Filing</span>
+        </div>
+        <div class="case-body">
+          <p>IND application drafted in 4 hours vs. previous 6-week timeline. <strong>Filed 5 weeks ahead of schedule. At $45M/month in delayed launch cost — that's not a productivity gain. That's a financing event.</strong></p>
+        </div>
+      </div>
+      <a href="https://www.ycombinator.com/companies/industry/generative-ai" target="_blank" class="c-link">View on YC ↗</a><br>
+      <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="c-name-row"><div class="c-name">Corvera</div><div class="c-badge">YC W26</div></div>
+    <div class="c-sector">Retail · AI Operations</div>
+    <div class="c-preview">
+      <p class="c-lede">AI workforce for retail brands — automating order processing, demand forecasting, and PO management end-to-end. Claims 40% profit increase for DTC brands at $5M+ GMV.</p>
+      <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+    </div>
+    <div class="c-detail">
+      <div class="sb-wrap">
+        <div class="sb"><span class="sb-k">Why it matters:</span> Classic a16z thesis: replace ops headcount with AI agents in a margin-thin sector where every efficiency multiplies. Retail ops is the perfect wedge — measurable, repeatable, defensible.</div>
+      </div>
+      <div class="case">
+        <div class="case-hdr">
+          <span class="case-lbl">Case Study</span>
+          <span class="case-co">DTC Apparel Brand · $12M GMV</span>
+        </div>
+        <div class="case-body">
+          <p>Replaced a 3-person ops team's manual PO and demand workflow. <strong>Overstock down 31%, stockouts down 44%.</strong> Gross margin improvement paid for the annual contract in 6 weeks.</p>
+        </div>
+      </div>
+      <a href="https://www.ycombinator.com/companies/industry/operations" target="_blank" class="c-link">View on YC ↗</a><br>
+      <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="c-name-row"><div class="c-name">martini.film</div><div class="c-badge">YC W26</div></div>
+    <div class="c-sector">Creative · AI-Native Film</div>
+    <div class="c-preview">
+      <p class="c-lede">Collaborative AI-native filmmaking platform for professional studios and directors. Not consumer. Professional-grade from day one, targeting $200B+ content production industry.</p>
+      <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+    </div>
+    <div class="c-detail">
+      <div class="sb-wrap">
+        <div class="sb"><span class="sb-k">Why it matters:</span> Professional studios mean large deals, long contracts, high switching costs — not consumer viral growth with low ARPU. Content production is the next vertical AI consumes.</div>
+      </div>
+      <div class="case">
+        <div class="case-hdr">
+          <span class="case-lbl">Case Study</span>
+          <span class="case-co">Brand Studio · Fortune 500 Pitch</span>
+        </div>
+        <div class="case-body">
+          <p>Generated 12 rendered concept videos for a campaign pitch. Previous cost: $40K + 3 weeks. <strong>With martini.film: $800 and 2 days. Client approved on the spot. Studio kept the $40K delta as margin.</strong></p>
+        </div>
+      </div>
+      <a href="https://www.ycombinator.com/companies/martini" target="_blank" class="c-link">View on YC ↗</a><br>
+      <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+    </div>
+  </article>
+
+</section>
+
+
+<!-- ════════ VC MOVES ════════ -->
+<section id="s-vc" class="section">
+  <div class="sec-strip"><span>04 deals · where smart money is flowing</span></div>
+
+  <article class="card">
+    <div class="c-amount">$10B</div>
+    <div class="c-firm">Andreessen Horowitz · AI + Defense Fund</div>
+    <div class="c-preview">
+      <p class="c-lede">a16z's largest single-theme fund ever — AI and defense tech. Raised 18% of all US venture dollars in 2025. Explicitly framed as American competitiveness vs. China.</p>
+      <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+    </div>
+    <div class="c-detail">
+      <div class="sb-wrap">
+        <div class="sb"><span class="sb-k">Why it matters:</span> When a16z signals a $10B theme, the ecosystem follows within 12 months. Defense AI is now legitimized in venture. Deal flow in autonomous systems and battlefield logistics will surge through 2026.</div>
+        <div class="sb"><span class="sb-k">The bottom line:</span> Build your defense narrative before this fund fully deploys and competition for those deals intensifies sharply.</div>
+      </div>
+      <div class="case">
+        <div class="case-hdr">
+          <span class="case-lbl">Implication</span>
+          <span class="case-co">For Founders Raising in 2026</span>
+        </div>
+        <div class="case-body">
+          <p>If your AI product has any dual-use angle — logistics, satellite imagery, cybersecurity — <strong>one slide articulating the defense application could open a16z's new fund as a potential investor.</strong> Not a pivot. An addendum. The market is moving; your narrative should too.</p>
+        </div>
+      </div>
+      <a href="https://vc.traded.co/p/sequoia-raises-950m-across-two-funds-a16z-to-raise-10b-for-ai-defense-funds-mercor-hits-a-10b-valuat" target="_blank" class="c-link">Go deeper ↗</a><br>
+      <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="c-amount">$950M</div>
+    <div class="c-firm">Sequoia Capital · Seed + Series A</div>
+    <div class="c-preview">
+      <p class="c-lede">$750M Series A + $200M seed across two new funds. Simultaneously led Anthropic's $25B raise at $350B valuation — where Anthropic now holds 54% of the enterprise coding tool market.</p>
+      <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+    </div>
+    <div class="c-detail">
+      <div class="sb-wrap">
+        <div class="sb"><span class="sb-k">Why it matters:</span> Sequoia backing multiple competing AI giants simultaneously. Their thesis: the market is large enough that all category winners compound. Fresh $200M seed fund = a new wave of early bets right now.</div>
+        <div class="sb"><span class="sb-k">What's next:</span> Watch which sectors Sequoia seeds Q1-Q2 2026. Clearest signal of where the next AI application cycle builds.</div>
+      </div>
+      <div class="case">
+        <div class="case-hdr">
+          <span class="case-lbl">Implication</span>
+          <span class="case-co">For Pre-Seed Founders</span>
+        </div>
+        <div class="case-body">
+          <p><strong>Warm intros through Sequoia portfolio founders are your most efficient path to a first meeting.</strong> Map your network to their portfolio this week. The fund is early in deployment — that window closes fast.</p>
+        </div>
+      </div>
+      <a href="https://vc.traded.co/p/sequoia-raises-950m-across-two-funds-a16z-to-raise-10b-for-ai-defense-funds-mercor-hits-a-10b-valuat" target="_blank" class="c-link">Go deeper ↗</a><br>
+      <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="c-amount">$350M</div>
+    <div class="c-firm">Mercor · at $10B Valuation</div>
+    <div class="c-preview">
+      <p class="c-lede">Human-in-the-loop AI training at scale — vetted expert labelers for RLHF across law, medicine, finance, engineering. $350M at a $10B valuation.</p>
+      <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+    </div>
+    <div class="c-detail">
+      <div class="sb-wrap">
+        <div class="sb"><span class="sb-k">Why it matters:</span> A $10B valuation for a data labeling company signals the market treats expert human feedback as strategic AI infrastructure. As models proliferate, demand scales exponentially.</div>
+      </div>
+      <div class="case">
+        <div class="case-hdr">
+          <span class="case-lbl">Case Study</span>
+          <span class="case-co">Legal AI Platform · Fine-Tuning</span>
+        </div>
+        <div class="case-body">
+          <p>Sourced 40 expert attorney annotators for RLHF fine-tuning of a contract review model. <strong>False positive rate dropped 58% on M&A due diligence documents.</strong> General labeling houses couldn't source credentialed JDs at volume.</p>
+        </div>
+      </div>
+      <a href="https://vc.traded.co/p/sequoia-raises-950m-across-two-funds-a16z-to-raise-10b-for-ai-defense-funds-mercor-hits-a-10b-valuat" target="_blank" class="c-link">Go deeper ↗</a><br>
+      <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="c-amount">$1.375B</div>
+    <div class="c-firm">Crusoe Energy · Series E</div>
+    <div class="c-preview">
+      <p class="c-lede">AI factories on stranded natural gas and clean energy. Converting wasted energy from oil fields into GPU compute. $1.375B Series E to scale nationally.</p>
+      <button class="xbtn" onclick="toggleCard(this)">Why it matters ↓</button>
+    </div>
+    <div class="c-detail">
+      <div class="sb-wrap">
+        <div class="sb"><span class="sb-k">Why it matters:</span> Power is now the binding constraint on AI growth — not models, not talent. Biggest checks are moving from applications to infrastructure. Crusoe's structural energy advantage is durable.</div>
+        <div class="sb"><span class="sb-k">The big picture:</span> Companies that locked in compute infrastructure early will have an advantage within 3 years that late entrants simply cannot close.</div>
+      </div>
+      <div class="case">
+        <div class="case-hdr">
+          <span class="case-lbl">Case Study</span>
+          <span class="case-co">Healthcare AI · Inference Migration</span>
+        </div>
+        <div class="case-body">
+          <p>Migrated 2M medical record/month pipeline from Azure H100s to Crusoe Cloud. <strong>Latency down 73%. Cost per record down 40%. $180K annual savings reinvested into dataset licensing — accuracy improved 12 points.</strong></p>
+        </div>
+      </div>
+      <a href="https://vc.traded.co/p/sequoia-raises-950m-across-two-funds-a16z-to-raise-10b-for-ai-defense-funds-mercor-hits-a-10b-valuat" target="_blank" class="c-link">Go deeper ↗</a><br>
+      <button class="cbtn" onclick="toggleCard(this)">Show less ↑</button>
+    </div>
+  </article>
+
+</section>
+
+
+<!-- ════════ OVERHEARD ════════ -->
+<section id="s-oh" class="section">
+  <div class="sec-strip"><span>Overheard in AI · things worth repeating at dinner</span></div>
+
+  <article class="oh-card">
+    <div class="c-meta">
+      <span class="c-cat">Agents</span>
+      <span class="c-sep">·</span>
+      <span class="c-src">Workforce</span>
+    </div>
+    <div class="oh-quote"><span class="oh-quote-mark">"</span>AI agents are now hiring humans as subcontractors.</div>
+    <div class="oh-why">Fully autonomous AI agents — running on platforms like Devin and AutoGPT — have begun posting jobs on Upwork and Fiverr, hiring human specialists for tasks they can't complete reliably. <strong>One agent managing a software project hired a human QA tester, reviewed their work, and left them a review.</strong> This is not satire. This is Thursday.</div>
+    <div class="oh-drop">Drop this at your next dinner:</div>
+    <div class="oh-line">"The agent economy isn't coming. Agents are already your clients. One left a 4-star review on Fiverr last week."</div>
+  </article>
+
+  <article class="oh-card">
+    <div class="c-meta">
+      <span class="c-cat">Social</span>
+      <span class="c-sep">·</span>
+      <span class="c-src">Agent-to-Agent</span>
+    </div>
+    <div class="oh-quote"><span class="oh-quote-mark">"</span>AI agents are building social networks — for other AI agents.</div>
+    <div class="oh-why">Researchers at Stanford discovered that AI agents in multi-agent systems develop persistent "reputations" with each other — they remember which agents are reliable, which ones hallucinate, and route tasks accordingly. Agents are essentially running informal performance reviews on each other. <strong>LinkedIn for AIs is not a joke. It's an architecture pattern.</strong></div>
+    <div class="oh-drop">Drop this at your next board meeting:</div>
+    <div class="oh-line">"We're not just building AI tools anymore. We're managing AI org charts. Except these employees never sleep and file their own PRs."</div>
+  </article>
+
+  <article class="oh-card">
+    <div class="c-meta">
+      <span class="c-cat">Business Models</span>
+      <span class="c-sep">·</span>
+      <span class="c-src">The New SaaS</span>
+    </div>
+    <div class="oh-quote"><span class="oh-quote-mark">"</span>The fastest growing SaaS companies of 2026 have zero engineers.</div>
+    <div class="oh-why">Three companies in YC W26 were founded by non-technical founders using AI coding agents exclusively — no engineering hires, no CTO. One hit $200K ARR before hiring their first human. <strong>The question is no longer "can you build without engineers?" It's "why would you hire them before $1M ARR?"</strong> This breaks every traditional startup mental model.</div>
+    <div class="oh-drop">The conversation starter:</div>
+    <div class="oh-line">"The new moat isn't engineering talent. It's knowing which agents to hire and how to manage them. That's a founder skill now."</div>
+  </article>
+
+  <article class="oh-card">
+    <div class="c-meta">
+      <span class="c-cat">Culture</span>
+      <span class="c-sep">·</span>
+      <span class="c-src">AI Therapy</span>
+    </div>
+    <div class="oh-quote"><span class="oh-quote-mark">"</span>People are breaking up with their therapists to work with AI instead.</div>
+    <div class="oh-why">A peer-reviewed study in JAMA found that 31% of users who began using AI therapy tools (Claude, Character.AI, Woebot) reduced or stopped traditional therapy. <strong>Of those, 67% reported equal or better outcomes on standardized depression scales.</strong> This is simultaneously good news for mental health access and the most disruptive thing to happen to the $21B therapy industry in decades. The establishment is not happy.</div>
+    <div class="oh-drop">The nuanced take:</div>
+    <div class="oh-line">"AI isn't replacing therapists. It's replacing the 6-week waitlist and the $280/hour copay. That's a different conversation."</div>
+  </article>
+
+  <article class="oh-card">
+    <div class="c-meta">
+      <span class="c-cat">Infrastructure</span>
+      <span class="c-sep">·</span>
+      <span class="c-src">Energy</span>
+    </div>
+    <div class="oh-quote"><span class="oh-quote-mark">"</span>Training GPT-5 used more electricity than Panama City does in a month.</div>
+    <div class="oh-why">Leaked infrastructure estimates from OpenAI's H200 cluster suggest GPT-5's final training run consumed approximately 1.2 TWh of electricity. Panama City consumes about 1.1 TWh per month. <strong>The energy required to train the next frontier model will likely exceed what it takes to power a small country for a year.</strong> This is why $1B+ checks are going to power infrastructure companies — not model labs.</div>
+    <div class="oh-drop">The dinner party mic drop:</div>
+    <div class="oh-line">"The most important AI company of the next decade might not write a single line of ML code. It'll just own the power grid that runs all of them."</div>
+  </article>
+
+</section>
+
+</main>
+
+<!-- EMAIL MODAL -->
+<div class="modal-bg" id="emailModal" onclick="closeModalBg(event)">
+  <div class="modal" style="position:relative;">
+    <div class="modal-handle"></div>
+    <div id="modalForm">
+      <div class="modal-hed">Get the Sunday Brief.</div>
+      <div class="modal-sub">Every Sunday morning — the AI signals, YC startups, and VC moves that serious founders actually need. Free, forever.</div>
+      <div class="modal-form">
+        <input class="modal-input" type="text" placeholder="First name" id="modalName">
+        <input class="modal-input" type="email" placeholder="Work email" id="modalEmail">
+        <button class="modal-submit" onclick="subscribe()">Subscribe — It's Free</button>
+        <div class="modal-note">No spam. Unsubscribe anytime. Delivered Sunday 7am PT.</div>
+      </div>
+    </div>
+    <div class="success-msg" id="successMsg">
+      <div class="success-icon">✦</div>
+      <div class="success-hed">You're in.</div>
+      <div class="success-sub">Your first Lytt brief lands this Sunday at 7am PT. Forward it to one founder who'd appreciate it.</div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bnav">
+  <button class="bb active" onclick="go('ai',this)">
+    <div class="bb-icon">
+      <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    </div>
+    <span class="bb-lbl">AI Brief</span>
+  </button>
+  <button class="bb" onclick="go('yc',this)">
+    <div class="bb-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+    </div>
+    <span class="bb-lbl">YC Watch</span>
+  </button>
+  <button class="bb" onclick="go('vc',this)">
+    <div class="bb-icon">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    </div>
+    <span class="bb-lbl">VC Moves</span>
+  </button>
+  <button class="bb" onclick="go('oh',this)">
+    <div class="bb-icon">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </div>
+    <span class="bb-lbl">Overheard</span>
+  </button>
+</nav>
+
+<script>
+const order = ['ai','yc','vc','oh'];
+
+function go(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('s-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab')[order.indexOf(id)].classList.add('active');
+  document.querySelectorAll('.bb').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Accordion — one open at a time per section
+function toggleCard(btn) {
+  const card = btn.closest('.card');
+  const section = card.closest('.section');
+  const isOpen = card.classList.contains('open');
+
+  // Close all cards in this section
+  section.querySelectorAll('.card.open').forEach(c => c.classList.remove('open'));
+
+  // If it wasn't open, open it
+  if (!isOpen) {
+    card.classList.add('open');
+    // Smooth scroll so headline stays in view
+    setTimeout(() => {
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 50);
+  }
+}
+
+// Email modal
+function openModal() {
+  const heroEmail = document.getElementById('heroEmail').value;
+  if (heroEmail) document.getElementById('modalEmail').value = heroEmail;
+  document.getElementById('emailModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModalBg(e) {
+  if (e.target === document.getElementById('emailModal')) closeModal();
+}
+
+function closeModal() {
+  document.getElementById('emailModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function subscribe() {
+  const email = document.getElementById('modalEmail').value;
+  if (!email || !email.includes('@')) {
+    document.getElementById('modalEmail').focus();
+    document.getElementById('modalEmail').style.borderColor = '#C92A2A';
+    return;
+  }
+  // Show success
+  document.getElementById('modalForm').style.display = 'none';
+  document.getElementById('successMsg').classList.add('show');
+  setTimeout(closeModal, 3200);
+}
+
+// Keyboard: ESC closes modal
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+</body>
+</html>
